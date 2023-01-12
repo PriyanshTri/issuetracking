@@ -1,21 +1,3 @@
-// window.onload = function(){
-//     window.onscroll = function() {myFunction()};
-// var navbar = document.getElementById("navbar");
-// console.log(navbar);
-// var sticky = navbar.offsetTop;
-// function myFunction() {
-//     if (window.pageYOffset >= sticky) {
-//       navbar.classList.add("sticky");
-//     } else if(window.pageYOffset<sticky) {
-//       navbar.classList.remove("sticky");
-//     }
-//   }
-//   if(this.scrollY > 500){
-//     $('.scroll-up-btn').addClass("show");
-// }else{
-//     $('.scroll-up-btn').removeClass("show");
-// };
-// };
 $(document).ready(function(){
     $(window).scroll(function(){
         // sticky navbar on scroll script
@@ -24,21 +6,16 @@ $(document).ready(function(){
         }else{
             $('.navbar').removeClass("sticky");
         }
-        if(this.scrollY>500){
-            $('scroll-up-btn').addClass("show");
-        }
-        else{
-            $('scroll-up-btn').removeClass("show");
-        }
-    });});
-     // slide-up script
-     $('.scroll-up-btn').click(function(){
-        $('html').animate({scrollTop: 0});
-        // removing smooth scroll on slide-up button click
-        $('html').css("scrollBehavior", "auto");
-    });
-
-    $('.navbar .menu li a').click(function(){
-        // applying again smooth scroll on menu items click
-        $('html').css("scrollBehavior", "smooth");
-    });
+    });}); 
+let mybutton = document.getElementById("scroll-to-top");
+window.onscroll = function() {scrollFunction()};
+function scrollFunction() {
+  if (document.body.scrollTop > 300 || document.documentElement.scrollTop > 300) {
+    mybutton.style.display = "block";
+  } else {
+    mybutton.style.display = "none";
+  }
+}
+function topScroll() {
+  document.documentElement.scrollTop = 0;
+}

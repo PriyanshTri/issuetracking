@@ -3,43 +3,26 @@ body{
     height: 20000px;
 }
 .navbar {background-image: linear-gradient(135deg, #94a8ff 0%, #8539d1 100%);
-    
 }
-.scroll-up-btn{
-    position: fixed;
-    height: 45px;
-    width: 42px;
-    background: crimson;
-    right: 30px;
-    bottom: 10px;
-    text-align: center;
-    line-height: 45px;
-    color: #fff;
-    z-index: 9999;
-    font-size: 30px;
-    border-radius: 6px;
-    border-bottom-width: 2px;
-    cursor: pointer;
-    opacity: 0;
-    pointer-events: none;
-    transition: all 0.3s ease;
+#scroll-to-top{
+    display: none; /* Hidden by default */
+  position: fixed; /* Fixed/sticky position */
+  bottom: 20px; /* Place the button at the bottom of the page */
+  right: 30px; /* Place the button 30px from the right */
+  z-index: 99; /* Make sure it does not overlap */
+  border: none; /* Remove borders */
+  outline: none; /* Remove outline */
+  background-color: #93a7fe; /* Set a background color */
+  color: #8640d4; /* Text color */
+  cursor: pointer; /* Add a mouse pointer on hover */
+  padding: 15px; /* Some padding */
+  border-radius: 10px; 
+  font-size: 18px; 
+  box-shadow: 5px 3px 6px 0px rgba(0,0,0,0.78);
 }
-.show{
-    bottom: 30px;
-    opacity: 1;
-    pointer-events: auto;
-}
-.scroll-up-btn:hover{
-    filter: brightness(90%);
-}
-.show{
-    bottom: 30px;
-    opacity: 1;
-    pointer-events: auto;
-}
-.scroll-up-btn:hover{
-    filter: brightness(90%);
-}
+#scroll-to-top:hover {
+    background-color: rgb(13, 64, 183); 
+  }
 .white{
     color:white;
 }
@@ -69,7 +52,7 @@ body{
     .right form .error-box{
        width: 150px;
     }
-    .scroll-up-btn{
+    #scroll-to-top{
         right: 15px;
         bottom: 15px;
         height: 38px;
