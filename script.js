@@ -54,6 +54,7 @@ function createNewCard() {
     let details=JSON.parse(localStorage.getItem(localStorage.key(i)));
     let btn_prev=details['state']=='Open'? "Delete": "Previous";
     let btn_next=details['state']=='Finished'? "Delete": "Next";
+    let id=10;
     let temp = `<br><div class="card">
     <div class="card-body">
       <p class="card-title text-start">Issue Id: ${details['hash']}</p>
@@ -62,14 +63,14 @@ function createNewCard() {
       <h6 class="card-subtitle mb-2 text-muted">Assigned To <br> ${details["assigned"]}</h6>
       <p class="card-text alert alert-dark">description: <br>${details["desc"]}</p>
       <h5 class="card-text">Severity: ${details["sev"]}</h5>
-      <button type="button" class="btn btn-danger" onclick="deleteIssue()">${btn_prev}</button>
-      <button type="button" class="btn btn-primary" onclick="nextIssue()" >${btn_next}</button></div>
+      <button type="button" class="btn btn-danger" onclick="deleteIssue('${details['hash']}','${details['state']}')">${btn_prev}</button>
+      <button type="button" class="btn btn-primary" onclick="nextIssue('${details['hash']}','${details['state']}')" >${btn_next}</button></div>
   </div><br>`;
   $(".card-add").prepend(temp);
     if(details['state']=="Open"){
     $(".newCardAdd").prepend(temp);
     }
-    else if(details['state']=="development"){
+    else if(details['state']=="Development"){
       $(".devCardAdd").prepend(temp);
     }
     else if(details['state']=="QA"){
@@ -80,13 +81,39 @@ function createNewCard() {
     }
   }
 }
-function deleteIssue(hash){
-  console.log(hash);
-  // localStorage.removeItem(hash);
+function deleteIssue(hash,state){
+  if(state=="Open"){
+    localStorage.removeItem(hash);
+  }
+  else if(state=="Development"){
+    let element=localStorage.getItem(hash);
+    console.log(element+" first");
+    element['state']="Open";
+    console.log(element+" first");
+    localStorage.removeItem(hash);
+    localStorage.setItem(hash,element);
+    console.log(localStorage.getItem(hash)+" second");
+    $(".devCardAdd").empty();
+  }
+  else if(state=="QA"){
+    console.log(state);
+  }
   $(".newCardAdd").empty();
   $(".card-add").empty();
   createNewCard();
 }
+function nextIssue(hash, state){
+  if(state=='Open'){
+    let element=JSON.parse(localStorage.getItem(hash));
+    console.log(element+typeof(element));
+    element['hash']='Development';
+    console.log(element)
+    localStorage.removeItem(hash);
+    localStorage.setItem(hash,element);
+    console.log(element);
+  }
+}
+
 function addNew(hash,card) {
   localStorage.setItem(hash, JSON.stringify(card));
   console.log(card+" "+"done");
