@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -52,7 +53,7 @@
           <input type="text" class="form-control" id="assigned-to" placeholder="Enter name" name="assigned" required>
         </div>
         <div class="mb-3">
-          <label for="exampleFormControlTextarea1" class="form-label" >Description</label>
+          <label for="exampleFormControlTextarea1" class="form-label">Description</label>
           <br>
           <textarea class="form-control" id="exampleFormControlTextarea1" placeholder="enter the description in detail"
             rows="3" name="desc" required></textarea>
@@ -73,21 +74,40 @@
     </div>
   </div>
   <div class="container-fluid" id="issue-table">
-    <div class="table" id="new-issue-card" >
+    <div class="table" id="new-issue-card">
       <div id="new">
-      <h3>NEW</h3>
-    </div>
-    <div class="cardAdd">
-    </div>
+        <h3>NEW</h3>
+      </div>
+      <div class="newCardAdd">
+      </div>
     </div>
     <div class="table">
-      <h3>DEVELOPMENT</h3>
+      <div id="new">
+        <h3>DEVELOPMENT</h3>
+      </div>
+      <div class="devCardAdd">
+      </div>
     </div>
-    <div class="table"><h3>QA</h3></div>
-    <div class="table"><h3>FINISHED</h3></div>
+    <div class="table">
+      <div id="new">
+        <h3>QA</h3>
+      </div>
+      <div class="qaCardAdd">
+      </div>
+    </div>
+    <div class="table">
+      <div id="new">
+        <h3>FINISHED</h3>
+      </div>
+      <div class="finCardAdd">
+      </div>
+    </div>
   </div>
   <div class="cards-list" id="cards-list">
-    <h3><hr>Card List<hr></h3>
+    <h3>
+      <hr>Card List
+      <hr>
+    </h3>
     <div class="card-add"></div>
   </div>
 </body>
