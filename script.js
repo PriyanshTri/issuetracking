@@ -27,6 +27,7 @@ function topScroll() {
 }
 $("#add").click(function (event) {
   event.preventDefault();
+  
   let hash = "id" + Math.random().toString(16).slice(2);
   let issue = $("#issue").val();
   let assigned = $("#assigned-to").val();
@@ -40,6 +41,7 @@ $("#add").click(function (event) {
     'sev': sev,
     'state': "Open",
   };
+  $('#new-issue').trigger('reset');
   addNew(hash,card);
 });
 
@@ -48,17 +50,16 @@ function createNewCard() {
     return;
   }
   $(".newCardAdd").empty();
-  $("devCardAdd").empty();
-  $("qaCardAdd").empty();
-  $("finCardAdd").empty();
-  $(".card-add").empty();
+  $(".devCardAdd").empty();
+  $(".qaCardAdd").empty();
+  $(".finCardAdd").empty();
   for (let i=0;i< localStorage.length;i++) {
     let details=JSON.parse(localStorage.getItem(localStorage.key(i)));
     let btn_prev=details['state']=='Open'? "Delete": "Previous";
     let btn_next=details['state']=='Finished'? "Delete": "Next";
     let temp = `<br><div class="card">
     <div class="card-body">
-      <p class="card-title text-start">Issue Id: ${details['hash']}</p>
+      <p class="card-title text-start">Issue Id: ${details['hash']}<button style="float:right;border-radius:25%;" onclick="deleteCard('${details['hash']}')"><i class="fa-sharp fa-solid fa-circle-xmark" ></i></button></p>
       <p class="alert alert-primary">${details['state']}</p>
       <h5 class="card-title alert alert-danger">${details["issue"]}</h5>
       <h6 class="card-subtitle mb-2 text-muted">Assigned To <br> ${details["assigned"]}</h6>
@@ -81,6 +82,14 @@ function createNewCard() {
       $(".finCardAdd").prepend(temp);
     }
   }
+}
+function deleteCard(hash){
+  localStorage.removeItem(hash);
+  $(".newCardAdd").empty();
+  $(".devCardAdd").empty();
+  $(".qaCardAdd").empty();
+  $(".finCardAdd").empty();
+  createNewCard();
 }
 function deleteIssue(hash,state){
   let details=JSON.parse(localStorage.getItem(hash));
