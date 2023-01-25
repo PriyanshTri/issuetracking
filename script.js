@@ -1,4 +1,3 @@
-let count = 1;
 $(document).ready(function () {
   createNewCard();
   $(window).scroll(function () {
@@ -49,12 +48,14 @@ function createNewCard() {
     return;
   }
   $(".newCardAdd").empty();
+  $("devCardAdd").empty();
+  $("qaCardAdd").empty();
+  $("finCardAdd").empty();
   $(".card-add").empty();
   for (let i=0;i< localStorage.length;i++) {
     let details=JSON.parse(localStorage.getItem(localStorage.key(i)));
     let btn_prev=details['state']=='Open'? "Delete": "Previous";
     let btn_next=details['state']=='Finished'? "Delete": "Next";
-    let id=10;
     let temp = `<br><div class="card">
     <div class="card-body">
       <p class="card-title text-start">Issue Id: ${details['hash']}</p>
@@ -82,36 +83,61 @@ function createNewCard() {
   }
 }
 function deleteIssue(hash,state){
+  let details=JSON.parse(localStorage.getItem(hash));
   if(state=="Open"){
     localStorage.removeItem(hash);
+    $(".newCardAdd").empty();
   }
   else if(state=="Development"){
-    let element=localStorage.getItem(hash);
-    console.log(element+" first");
-    element['state']="Open";
-    console.log(element+" first");
+    details['state']="Open";
     localStorage.removeItem(hash);
-    localStorage.setItem(hash,element);
+    localStorage.setItem(hash,JSON.stringify(details));
     console.log(localStorage.getItem(hash)+" second");
     $(".devCardAdd").empty();
   }
   else if(state=="QA"){
-    console.log(state);
+    details['state']="Development";
+    localStorage.removeItem(hash);
+    localStorage.setItem(hash,JSON.stringify(details));
+    $(".qaCardAdd").empty();
   }
-  $(".newCardAdd").empty();
+  else if(state=='Finished'){
+    details['state']="QA";
+    localStorage.removeItem(hash);
+    localStorage.setItem(hash,JSON.stringify(details));
+    $(".finCardAdd").empty();
+  }
   $(".card-add").empty();
   createNewCard();
 }
 function nextIssue(hash, state){
+  let details=JSON.parse(localStorage.getItem(hash));
   if(state=='Open'){
-    let element=JSON.parse(localStorage.getItem(hash));
-    console.log(element+typeof(element));
-    element['hash']='Development';
-    console.log(element)
+    details['state']="Development";
     localStorage.removeItem(hash);
-    localStorage.setItem(hash,element);
-    console.log(element);
+    localStorage.setItem(hash,JSON.stringify(details));
+    console.log(localStorage.getItem(hash)+" second");
+    $(".newCardAdd").empty();
   }
+  else if(state=='Development'){
+    details['state']="QA";
+    localStorage.removeItem(hash);
+    localStorage.setItem(hash,JSON.stringify(details));
+    console.log(localStorage.getItem(hash)+" second");
+    $(".devCardAdd").empty();
+  }
+  else if(state=='QA'){
+    details['state']="Finished";
+    localStorage.removeItem(hash);
+    localStorage.setItem(hash,JSON.stringify(details));
+    console.log(localStorage.getItem(hash)+" second");
+    $(".qaCardAdd").empty();
+  }
+  else if(state=='Finished'){
+    localStorage.removeItem(hash);
+    $(".finCardAdd").empty();
+  }
+  createNewCard();
 }
 
 function addNew(hash,card) {
