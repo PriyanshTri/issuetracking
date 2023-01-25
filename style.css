@@ -109,7 +109,7 @@ body {
   }
 }
 
-@media (max-width: 500px) {
+@media (max-width: 600px) {
   .home .home-content .text-2 {
     font-size: 50px;
   }
@@ -143,5 +143,13 @@ body {
     width: 35px;
     font-size: 23px;
     line-height: 38px;
+  }
+  #issue-table {
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  #issue-table>div {
+    width: 98%;
   }
 }
